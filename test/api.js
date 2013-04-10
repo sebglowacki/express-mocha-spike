@@ -1,19 +1,30 @@
-var app = require('../app')
-    , request = require('supertest');
+var request = require('./support/http')
+    , app = require('../app');
 
 describe('Counter API', function () {
 
-//    before(function (done) {
-//        http.createServer(app, done);
-//    });
-
-    describe('GET /', function(){
-        it('should redirect to /users', function(done){
+    describe('GET /', function () {
+        it('should redirect to /users', function (done) {
             request(app)
                 .get('/')
-                .end(function(err, res){
-                    console.log(res);
+                .end(function (err, res) {
+//                    console.log(res);
                     res.should.have.status(200);
+                    done();
+                })
+        })
+    });
+
+    describe('GET /users', function(){
+        it('should display a list of users', function(done){
+            request(app)
+                .get('/users')
+                .end(function(err, res){
+//                    console.log(res.body);
+                    res.text.should.include('foo');
+//                    res.text.should.include('>TJ<');
+//                    res.text.should.include('>Guillermo<');
+//                    res.text.should.include('>Nathan<');
                     done();
                 })
         })
