@@ -1,5 +1,6 @@
 var request = require('./support/http')
-    , app = require('../app');
+    , app = require('../app')
+    , should = require('should');
 
 describe('Counter API', function () {
 
